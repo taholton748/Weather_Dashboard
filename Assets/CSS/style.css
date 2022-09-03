@@ -1,0 +1,19 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.header {
+    color:white;
+    background-color: navy;
+    padding:10px;
+    text-align: center;
+    font-weight: bold;
+}
+h2 {
+    font-weight: bold;
+}
+.input-field {
+    width: 100%;
+}
+.feature-city {
+    display:block;
+}

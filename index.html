@@ -12,7 +12,34 @@
     <header class="header">
         <h1>Weather Dashboard</h1>
     </header>
-    
+    <main class="container row">
+        <div class="col-md-3">
+            <div>
+                <h2>Search for a City:</h2>
+                <form>
+                    <input class="input-field" type="text" placeholder="Chapel Hill">
+                    <button class="btn btn-primary btn-block mt-3" type="submit">Search</button>
+                </form>
+            </div>
+            <hr>
+            <div>
+                saved cities
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row feature-city border border-dark mt-3 mb-3 p-2">
+                <h2>City and date</h2>
+                <p>Temp:</p>
+                <p>Wind:</p>
+                <p>Humidity:</p>
+                <p>UV Index:</p>
+            </div>
+            <div class="row">
+                <h5><strong>5-Day Forecast:</strong></h5>
+            </div>
+        </div>
+
+    </main>
     <script src="./Assets/JS/script.js"></script>
 </body>
 </html>
