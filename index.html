@@ -12,33 +12,44 @@
     <header class="header">
         <h1>Weather Dashboard</h1>
     </header>
-    <main class="container row">
-        <div class="col-md-3">
+    <main class="container row col-12">
+        <div class="col-12 col-md-3">
             <div>
                 <h2>Search for a City:</h2>
                 <form>
-                    <input class="input-field" type="text" placeholder="Chapel Hill">
-                    <button class="btn btn-primary btn-block mt-3" type="submit">Search</button>
+                    <input class="input-field" name="cityname" id="cityName" type="text" placeholder="Chapel Hill">
+                    <button class="btn btn-primary btn-block mt-3" type="submit" id="searchBtn">Search</button>
                 </form>
-            </div>
-            <hr>
-            <div>
-                saved cities
+                <hr>
             </div>
         </div>
-        <div class="col-md-9">
-            <div class="row feature-city border border-dark mt-3 mb-3 p-2" id="cityData">
-                <h2>City and date</h2>
+        <div class="col-12 col-md-9">
+            <div class="hidden row feature-style border border-dark mt-3 mb-3 p-2" id="currentCity">
+                <h2 id="cityHeader">City and date</h2>
+                <div id="currentWeather">
                 <p>Temp:</p>
                 <p>Wind:</p>
                 <p>Humidity:</p>
                 <p>UV Index:</p>
-            </div>
-            <div class="row">
-                <h5><strong>5-Day Forecast:</strong></h5>
+                </div>
             </div>
         </div>
+        <div class="col-12 col-md-3" id="history">
+            <div class="hidden row feature-style mt-3 mb-3 p-2">
+                <h5 class="header">Search History</h5>
+            </div>
+            <div id="historyBtns">
 
+            </div>
+        </div>
+        <div class="col-12 col-md-9">
+            <div class="hidden row feature-style">
+                <h5 class="header">5-Day Forecast</h5>
+                <div class="forecastCards" id="cityForecast">
+
+                </div>
+            </div>  
+        </div>
     </main>
     <script src="./Assets/JS/script.js"></script>
 </body>

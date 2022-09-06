@@ -10,31 +10,54 @@
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
 
+var cityInputEl = document.querySelector("#cityName");
+var searchBtnEl = document.querySelector("#searchBtn");
+var cityContainer = document.getElementById("currentCity");
+var cityNameDisplay = document.querySelector("#cityHeader");
+var currentWeatherEl = document.querySelector("#currentWeather");
+var searchHistoryHeader = document.querySelector("#history");
+var historyBtnsEl = document.querySelector("#historyBtns");
+var weatherForecastEl = document.querySelector("#cityForecast");
+
 var locationUrl =
-  "http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid=627e2e424592ad588e61a158f86366c9";
+  "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=1&appid=627e2e424592ad588e61a158f86366c9";
 var weatherUrl =
   "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=627e2e424592ad588e61a158f86366c9";
 
-var dataDisplay = document.getElementById("cityData");
+var getWeather = function () {
+  console.log("function was called");
 
-fetch(locationUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-    var locationArray = data.response.docs;
-    for (var i = 0; i < locationArray.length; i++) {
-      var listItem = document.createElement("li");
-      listItem.textContent = locationArray[i].dataDisplay //something;
-        .appendChild(listItem);
-    }
-  });
+  fetch(locationUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var locationArray = data.response.docs; //docs?
+      for (var i = 0; i < locationArray.length; i++) {
+        var cityData = document.createElement("li");
+        cityData.textContent = locationArray[i].name;
+        cityContainer.appendChild(cityData);
+      }
+    });
 
-fetch(weatherUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
+  fetch(weatherUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var weatherArray = data.response.docs; //docs?
+      for (var i = 0; i < weatherArray.length; i++) {
+        var cityWeather = document.createElement("li");
+        cityWeather.textContent = weatherArray[i].cityContainer //don't know yet;
+          .appendChild(cityWeather);
+      }
+    });
+};
+getWeather();
+document
+  .querySelector("#searchBtn")
+  .addEventListener("click", function (getWeather) {
+    console.log("hello");
   });

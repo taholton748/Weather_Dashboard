@@ -14,6 +14,10 @@ h2 {
 .input-field {
     width: 100%;
 }
-.feature-city {
+.feature-style {
     display:block;
+}
+.border {
+    border-style:solid;
+    border-color:blue;
 }
