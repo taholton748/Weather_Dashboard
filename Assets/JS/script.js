@@ -54,11 +54,11 @@ async function getWeather(cityName) {
   var cityLon = data["coord"]["lon"];
   var cityWind = data["wind"]["speed"];
   var cityHumidity = data["main"]["humidity"];
-  var weatherIcon = data["weather"]["0"]["icon"];
+  var weatherIcon = data["weather"]["0"]["icon"]; //displayed correctly?
 
   //cityWeather.textContent("Temp:" + cityTemp)
 
-  // secondApiCall(cityLat, cityLon);
+  secondApiCall(cityLat, cityLon);
   console.log(cityLat, cityLon);
 }
 
@@ -67,7 +67,7 @@ inputFormEl.addEventListener("submit", formSubmitHandler);
 
 async function secondApiCall(cityLat, cityLon) {
   var weatherUrl =
-    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    "https://api.openweathermap.org/data/2.5/forecast?lat=" +
     cityLat +
     "&lon=" +
     cityLon +
@@ -76,7 +76,7 @@ async function secondApiCall(cityLat, cityLon) {
 
   var response = await fetch(weatherUrl);
   var data = await response.json();
-  console.log("called it");
+  console.log(data);
 }
 
 // Fetch weather info for location found
