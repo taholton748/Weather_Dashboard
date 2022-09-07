@@ -16,7 +16,7 @@
         <div class="col-12 col-md-3">
             <div>
                 <h2>Search for a City:</h2>
-                <form>
+                <form id="inputForm">
                     <input class="input-field" name="cityname" id="cityName" type="text" placeholder="Chapel Hill">
                     <button class="btn btn-primary btn-block mt-3" type="submit" id="searchBtn">Search</button>
                 </form>
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="col-12 col-md-9">
-            <div class="hidden row feature-style border border-dark mt-3 mb-3 p-2" id="currentCity">
+            <div class="row feature-style border border-dark mt-3 mb-3 p-2" id="currentCity" hidden>
                 <h2 id="cityHeader">City and date</h2>
                 <div id="currentWeather">
                 <p>Temp:</p>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="col-12 col-md-9">
-            <div class="hidden row feature-style">
+            <div class="row feature-style" hidden>
                 <h5 class="header">5-Day Forecast</h5>
                 <div class="forecastCards" id="cityForecast">
 
@@ -51,6 +51,9 @@
             </div>  
         </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-ajax-uploader/2.6.7/SimpleAjaxUploader.min.js" integrity="sha512-sF1OQUX4620btxfaKLxsFeu/euV3FcPyH+uST3mdEjc8vW8R4z1xNiZhcG7wcZQbFkgFhiiBoAyYNMCL3jufPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./Assets/JS/script.js"></script>
+    
 </body>
 </html>
