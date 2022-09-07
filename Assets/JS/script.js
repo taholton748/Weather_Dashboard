@@ -21,13 +21,8 @@ var currentWeatherEl = document.querySelector("#currentWeather");
 var searchHistoryHeader = document.querySelector("#history");
 var historyBtnsEl = document.querySelector("#historyBtns");
 var weatherForecastEl = document.querySelector("#cityForecast");
-// Server API Declaration
 
-//   "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=1&appid=627e2e424592ad588e61a158f86366c9";
-// var weatherUrl =
-//   "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=627e2e424592ad588e61a158f86366c9";
 // Form input
-
 var formSubmitHandler = function (event) {
   event.preventDefault();
   var cityName = cityInputEl.value.trim();
