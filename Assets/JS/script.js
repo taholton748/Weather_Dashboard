@@ -10,8 +10,8 @@
 // THEN I am again presented with current and future conditions for that city
 
 //Variable declarations
-var apiKey = "627e2e424592ad588e61a158f86366c9";
-
+var apiKey = "d91f911bcf2c0f925fb6535547a5ddc9";
+var today = new Date();
 var inputFormEl = document.querySelector("#inputForm");
 var cityInputEl = document.querySelector("#cityName");
 var searchBtnEl = document.querySelector("#searchBtn");
@@ -21,6 +21,7 @@ var currentWeatherEl = document.querySelector("#currentWeather");
 var searchHistoryHeader = document.querySelector("#history");
 var historyBtnsEl = document.querySelector("#historyBtns");
 var weatherForecastEl = document.querySelector("#cityForecast");
+var currentForecastDiv = document.querySelector("#currentForecast");
 
 // Form input
 var formSubmitHandler = function (event) {
@@ -43,14 +44,25 @@ async function getWeather(cityName) {
   var data = await response.json();
   console.log(data);
 
-  var cityName = data["name"];
-  var cityTemp = data["main"]["temp"];
-  var cityLat = data["coord"]["lat"];
-  var cityLon = data["coord"]["lon"];
-  var cityWind = data["wind"]["speed"];
-  var cityHumidity = data["main"]["humidity"];
-  var weatherIcon = data["weather"]["0"]["icon"]; //displayed correctly?
+  var name = data.name;
+  var date =
+    today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear();
+  var cityLat = data.coord.lat;
+  var cityLon = data.coord.lon;
 
+  var currentCityDiv = `
+  <div class="row feature-style border border-dark mt-3 mb-3 p-2" id="currentCity">
+    <h2 id="cityHeader">${name} ${date}</h2>
+    <div id="currentWeather">
+    <p>Temp:</p>
+    <p>Wind:</p>
+    <p>Humidity:</p>
+    <p>UV Index:</p>
+    </div>
+  </div>
+  `;
+  currentForecastDiv.innerHTML = currentCityDiv;
+  console.log(data);
   //cityWeather.textContent("Temp:" + cityTemp)
 
   secondApiCall(cityLat, cityLon);
@@ -62,7 +74,7 @@ inputFormEl.addEventListener("submit", formSubmitHandler);
 
 async function secondApiCall(cityLat, cityLon) {
   var weatherUrl =
-    "https://api.openweathermap.org/data/2.5/forecast?lat=" +
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
     cityLat +
     "&lon=" +
     cityLon +
@@ -71,20 +83,24 @@ async function secondApiCall(cityLat, cityLon) {
 
   var response = await fetch(weatherUrl);
   var data = await response.json();
+
+  var temp = data.current.temp;
+  var icon = data.current.weather[0].icon;
+  var wind = data.current.wind_speed;
+  var humidity = data.current.humidity;
+  var uvi = data.current.uvi;
+
+  var currentWeatherDiv = `
+  <div class="row feature-style border border-dark mt-3 mb-3 p-2" id="currentCity">
+    <h2 id="cityHeader">City and date ${icon}</h2>
+    <div id="currentWeather">
+    <p>Temp: ${temp}</p>
+    <p>Wind: ${wind}</p>
+    <p>Humidity: ${humidity}</p>
+    <p>UV Index: ${uvi}</p>
+    </div>
+  </div>
+`;
+  currentForecastDiv.innerHTML = currentWeatherDiv;
   console.log(data);
 }
-
-// Fetch weather info for location found
-//   fetch(weatherUrl)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//       var weatherArray = data.response.docs; //docs?
-//       for (var i = 0; i < weatherArray.length; i++) {
-//         var cityWeather = document.createElement("p");
-//         cityWeather.textContent = weatherArray[i].cityContainer //don't know yet;
-//           .appendChild(cityWeather);
-//       }
-//     });
