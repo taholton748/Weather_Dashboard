@@ -22,12 +22,30 @@ var searchHistoryHeader = document.querySelector("#history");
 var historyBtnsEl = document.querySelector("#historyBtns");
 var weatherForecastEl = document.querySelector("#cityForecast");
 var currentForecastDiv = document.querySelector("#currentForecast");
+var weatherForeCastContainer = document.querySelector("#fiveDay");
+
+var title;
+
+// on load, get the items from local storage and display the items into a button
+
+function loadRecentSearch() {
+  // TODO: Retrieve from local storage
+
+  // Dynamically create the button
+  // Display the localStorage result as buttons
+
+  console.log("Yayyy!!!");
+}
+
+loadRecentSearch();
 
 // Form input
 var formSubmitHandler = function (event) {
   event.preventDefault();
   var cityName = cityInputEl.value.trim();
   console.log(cityName);
+
+  // TODO: Save the user input to localStorage
 
   getWeather(cityName);
 };
@@ -49,10 +67,11 @@ async function getWeather(cityName) {
     today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear();
   var cityLat = data.coord.lat;
   var cityLon = data.coord.lon;
+  title = `${name} ${date}`;
 
   var currentCityDiv = `
   <div class="row feature-style border border-dark mt-3 mb-3 p-2" id="currentCity">
-    <h2 id="cityHeader">${name} ${date}</h2>
+    <h2 id="cityHeader">${title}</h2>
     <div id="currentWeather">
     <p>Temp:</p>
     <p>Wind:</p>
@@ -63,7 +82,6 @@ async function getWeather(cityName) {
   `;
   currentForecastDiv.innerHTML = currentCityDiv;
   console.log(data);
-  //cityWeather.textContent("Temp:" + cityTemp)
 
   secondApiCall(cityLat, cityLon);
   console.log(cityLat, cityLon);
@@ -85,14 +103,13 @@ async function secondApiCall(cityLat, cityLon) {
   var data = await response.json();
 
   var temp = data.current.temp;
-  var icon = data.current.weather[0].icon;
   var wind = data.current.wind_speed;
   var humidity = data.current.humidity;
   var uvi = data.current.uvi;
 
   var currentWeatherDiv = `
   <div class="row feature-style border border-dark mt-3 mb-3 p-2" id="currentCity">
-    <h2 id="cityHeader">City and date ${icon}</h2>
+    <h2 id="cityHeader">${title}</h2>
     <div id="currentWeather">
     <p>Temp: ${temp}</p>
     <p>Wind: ${wind}</p>
@@ -103,4 +120,53 @@ async function secondApiCall(cityLat, cityLon) {
 `;
   currentForecastDiv.innerHTML = currentWeatherDiv;
   console.log(data);
+
+  weatherForeCastContainer.removeAttribute("hidden");
+
+  weatherForecastEl.innerHTML = "";
+
+  var dailyForecast = data.daily;
+
+  for (var i = 0; i < 5; i++) {
+    var currentDailyWeather = dailyForecast[i];
+    var date =
+      today.getMonth() +
+      1 +
+      "/" +
+      (today.getDate() + i + 1) +
+      "/" +
+      today.getFullYear();
+    var forecastIcon = currentDailyWeather.weather[0].icon;
+    var weatherDescription = currentDailyWeather.weather[0].description;
+    var weatherIconLink =
+      "<img src='http://openweathermap.org/img/wn/" +
+      forecastIcon +
+      "@2x.png' alt='" +
+      weatherDescription +
+      "' title='" +
+      weatherDescription +
+      "'  />";
+    console.log("Display Daily Weather: ", currentDailyWeather);
+
+    var dailyItem = document.createElement("div");
+    dailyItem.className = "day";
+    dailyItem.innerHTML =
+      "<p><strong>" +
+      date +
+      "</strong></p>" +
+      "<p>" +
+      weatherIconLink +
+      "</p>" +
+      "<p><strong>Temp:</strong> " +
+      currentDailyWeather.temp.day.toFixed(1) +
+      "°F</p>" +
+      "<p><strong>Wind Speed:</strong> " +
+      currentDailyWeather.wind_speed +
+      " MPH</p>" +
+      "<p><strong>Humidity:</strong> " +
+      currentDailyWeather.humidity +
+      "%</p>";
+
+    weatherForecastEl.appendChild(dailyItem);
+  }
 }
