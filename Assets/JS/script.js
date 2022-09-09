@@ -32,8 +32,11 @@ function loadRecentSearch() {
   // TODO: Retrieve from local storage
 
   // Dynamically create the button
-  // Display the localStorage result as buttons
+  var btn = document.createElement("button");
 
+  // Display the localStorage result as buttons
+  btn.innerHTML = "yep";
+  historyBtnsEl.appendChild(btn);
   console.log("Yayyy!!!");
 }
 
@@ -46,6 +49,7 @@ var formSubmitHandler = function (event) {
   console.log(cityName);
 
   // TODO: Save the user input to localStorage
+  localStorage.setItem("city", cityName);
 
   getWeather(cityName);
 };
